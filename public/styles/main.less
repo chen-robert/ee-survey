@@ -1,5 +1,40 @@
 @import "config";
+@import "navbar";
 
+.survey{
+  padding: 50px;
+  padding-top: 150px;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+.survey--title {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+.panel {
+  flex: 1;
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  
+  background-color: #eee;
+
+  transition-duration: @quick-animation-duration;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(68, 68, 68, 0.6);
+
+  &:hover {
+    box-shadow: 0 1px 1px rgba(68, 68, 68, 0.6);
+    background-color: darken(#eee, 5%);
+    transform: translateY(2px);
+  }
+}
+
+.hidden {
+  display: none;
+}
 
 
 * {
