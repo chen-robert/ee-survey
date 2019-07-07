@@ -14,6 +14,7 @@
         <div class="panel">
           <form class="hidden" method="POST" action="/vote">
             <input name="name" value="<%= sample.name %>">
+            <input name="other" value="<%= samples.map(sample => sample.name).filter(name => name !== sample.name).join(",") %>">
           </form>
           <audio href="<%= sample.url %>">
         </div>

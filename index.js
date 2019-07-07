@@ -20,4 +20,9 @@ app.get("/", (req, res) => {
     ]
   })
 });
+
+app.post("/vote", (req, res) => {
+  
+})
+
 app.listen(PORT, () => console.log(`Started server at port ${PORT}`));
