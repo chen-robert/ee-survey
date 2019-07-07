@@ -1,0 +1,28 @@
+{
+  "name": "survey",
+  "version": "1.0.0",
+  "description": "Survey website for my EE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo none",
+    "dev": "nodemon index.js --watch views --watch src --watch public --watch index.js",
+    "format": "prettier \"src/**/*\" --write",
+    "start": "node index.js"
+  },
+  "author": "Robert Chen",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^1.14.3",
+    "prettier-cli": "^0.1.0"
+  },
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.16.3",
+    "express-autoprefixer": "^5.4.0",
+    "less-middleware": "^3.1.0",
+    "material-icons": "^0.2.3",
+    "nodemon": "^1.19.1",
+    "typeface-open-sans": "0.0.54"
+  }
+}
