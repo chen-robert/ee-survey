@@ -54,7 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/vote", (req, res) => {
-  
+  req.session.trials++;
 })
 
 app.listen(PORT, () => console.log(`Started server at port ${PORT}`));
