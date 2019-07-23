@@ -5,18 +5,19 @@ window.onload = () => {
     let confirm = true;
     panel.onclick = () => {
       if(playCount === 0) {
-        return log("Wow, you didn't even listen to the samples and you could tell?");
+        return log("Wow, you didn't even listen to the samples and you could tell?", true, "...");
       }else if(playCount === 1){
-        return log("One more to go! You can do it!")
+        return log("One more to go! You can do it!", true, "...")
       }
 
       if(confirm) {
         confirm = false;
 
-        log("...");
+        log("Interesting...");
 
         logAfter("Are you absolutely sure? What if the fate of the universe rested on your decision?", 3 * 1000);
-
+        logAfter("Click again if you're 100% certain", 5 * 1000);
+        return;
       }
       
       panel.children[0].submit();
@@ -35,8 +36,13 @@ window.onload = () => {
 }
 
 const sentMessages = [];
-const log = (msg, preventDupes=true) => {
-  if(preventDupes && sentMessages.includes(msg)) return;
+const log = (msg, preventDupes=true, dupeMessage="") => {
+  if(preventDupes){
+    if(sentMessages.includes(msg)) {
+      if(dupeMessage === "") return;
+      else msg = dupeMessage;
+    }
+  }
 
   sentMessages.push(msg);
   document.getElementById("chat").insertAdjacentHTML("afterbegin", `
