@@ -9,14 +9,19 @@
   <body>
     <% include ../partials/navbar %>
     <section class="survey">
-      <p class="survey--title">Which audio sample sounds more like classical music?</p>
-      <% samples.forEach(sample => { %>
-        <div class="panel">
-          <form class="hidden" method="POST" action="/vote">
-            <input name="name" value="<%= sample.name %>">
-            <input name="other" value="<%= samples.map(sample => sample.name).filter(name => name !== sample.name).join(",") %>">
-          </form>
-          <audio href="<%= sample.url %>">
+      <p class="survey--title">Think hard... Which audio sample sounds more like classical music?</p>
+      <% samples.forEach((sample, i) => { %>
+        <div class="panel--container">
+          <audio controls>
+            <source src="<%= sample.url %>" type="audio/wav">
+          </audio>
+          <div class="panel">
+            <%= i === 0? "This One...": "No... This One" %>
+            <form class="hidden" method="POST" action="/vote">
+              <input name="name" value="<%= sample.name %>">
+              <input name="other" value="<%= samples.map(sample => sample.name).filter(name => name !== sample.name).join(",") %>">
+            </form>
+          </div>
         </div>
       <% }) %>
 

@@ -25,6 +25,13 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  if(!req.session.count) {
+    req.session.count = 0;
+  }
+  next();
+})
+
 const apiBase = "/music";
 app.get(apiBase + "/:id", (req, res, next) => {
   if(Object.keys(nameMap).includes(req.params.id)){
@@ -44,12 +51,30 @@ const getSample = type => {
   }
 }
 
+const randomize = arr => {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+const controlSample = () => {
+  return randomize([getSample("real"), getSample("baseline")]);
+}
+
+const testSample = () => {
+  return randomize([getSample("real"), getSample("generated")]);
+}
+
 app.get("/", (req, res) => {
+  const count = req.session.count;
+  req.session.count++;
+
   res.render("pages/index", {
-    samples: [
-      {url: "asdf", name: "a"},
-      {url: "asdfe", name: "b"}
-    ]
+    samples: count % 2 === 0? controlSample(): testSample()
   })
 });
 
