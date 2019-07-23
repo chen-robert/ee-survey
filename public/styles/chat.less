@@ -1,0 +1,34 @@
+#chat {
+  width: 500px;
+  margin: 0 auto;
+}
+
+body {
+  overflow-y: hidden;
+
+  &:after {
+    content  : "";
+    position : absolute;
+    z-index  : 1;
+    bottom   : 0;
+    left     : 0;
+    pointer-events   : none;
+    background-image : linear-gradient(to bottom, 
+                      rgba(255,255,255, 0), 
+                      rgba(255,255,255, 1) 90%);
+    width    : 100%;
+    height   : 4em;
+  }
+}
+
+.chat-message {
+  margin: 10px 0;
+  opacity: 0;
+
+  animation: fadein 1s forwards;
+}
+
+@keyframes fadein {
+  from { opacity: 0; max-height: 0; transform: translateY(5px);}
+  to   { opacity: 1; max-height: 100vh; transform: none;}
+}
