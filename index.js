@@ -74,7 +74,8 @@ app.get("/", (req, res) => {
   req.session.count++;
 
   res.render("pages/index", {
-    samples: count % 2 === 0? controlSample(): testSample()
+    samples: count % 2 === 0? controlSample(): testSample(),
+    informal: req.query.informal
   })
 });
 

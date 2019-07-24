@@ -7,16 +7,27 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
   </head>
   <body>
+    <script>window.INFORMAL = <%= informal? "true": "false" %></script>
     <% include ../partials/navbar %>
     <section class="survey">
-      <p class="survey--title">Think hard... Which audio sample sounds more like classical music?</p>
+      <p class="survey--title">
+        <% if(informal) { %>
+          Think hard... Which audio sample sounds more like classical music?
+        <% } else { %>
+          Please choose the audio clip that sounds most similar to classical music. 
+        <% } %>
+      </p>
       <% samples.forEach((sample, i) => { %>
         <div class="panel--container">
           <audio controls>
-            <source src="<%= sample.url %>" type="audio/wav">
+            <source src="<%= sample.url %>">
           </audio>
-          <div class="panel">
-            <%= i === 0? "This One...": "No... This One" %>
+          <div class="panel"> 
+            <% if(informal) { %>
+              <%= i === 0? "This One...": "No... This One" %>
+            <% } else { %>
+              <%= i === 0? "A": "B" %>
+            <% } %>
             <form class="hidden" method="POST" action="/vote">
               <input name="name" value="<%= sample.name %>">
               <input name="other" value="<%= samples.map(sample => sample.name).filter(name => name !== sample.name).join(",") %>">
@@ -24,10 +35,7 @@
           </div>
         </div>
       <% }) %>
-
-      <div id="chat">
-      </div>
-
     </section>
+    <div id="chat"></div>
   </body>
 </html>

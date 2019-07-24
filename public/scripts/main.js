@@ -1,25 +1,31 @@
 window.onload = () => {
   let playCount = 0;
 
-  Array.from(document.getElementsByClassName("panel")).forEach(panel => {
-    let confirm = true;
+  let confirm = true;
+  const panels = Array.from(document.getElementsByClassName("panel"))
+  panels.forEach(panel => {
     panel.onclick = () => {
-      if(playCount === 0) {
-        return log("Wow, you didn't even listen to the samples and you could tell?", true, "...");
-      }else if(playCount === 1){
-        return log("One more to go! You can do it!", true, "...")
+      if(window.INFORMAL) {
+        if(panel.classList.contains("disabled")) return;
+
+        if(playCount === 0) {
+          return log("Wow, you didn't even listen to the samples and you could tell?");
+        }else if(playCount === 1){
+          return log("One more to go! You can do it!")
+        }
+
+        if(confirm) {
+          confirm = false;
+
+          log("Interesting...");
+          panels.forEach(panel => panel.classList.add("disabled"));
+
+          logAfter("Are you absolutely sure? What if the fate of the universe rested on your decision?", 3 * 1000);
+          logAfter("Click again if you're 100% certain", 5 * 1000);
+          setTimeout(() => panels.forEach(panel => panel.classList.remove("disabled")), 5 * 1000);
+          return;
+        }
       }
-
-      if(confirm) {
-        confirm = false;
-
-        log("Interesting...");
-
-        logAfter("Are you absolutely sure? What if the fate of the universe rested on your decision?", 3 * 1000);
-        logAfter("Click again if you're 100% certain", 5 * 1000);
-        return;
-      }
-      
       panel.children[0].submit();
     }
   });
@@ -36,7 +42,7 @@ window.onload = () => {
 }
 
 const sentMessages = [];
-const log = (msg, preventDupes=true, dupeMessage="") => {
+const log = (msg, preventDupes=true, dupeMessage="...") => {
   if(preventDupes){
     if(sentMessages.includes(msg)) {
       if(dupeMessage === "") return;
