@@ -1,16 +1,21 @@
 global.__rootdir = __dirname;
 
 const express = require("express");
+const bodyParser = require("body-parser");
 const autoprefixer = require('express-autoprefixer');
 const lessMiddleware = require('less-middleware');
 const cookieSession = require("cookie-session");
 
-const {data, nameMap} = require(__rootdir + "/server/songs");
+const {controlSample, testSample, nameMap} = require(__rootdir + "/server/songs");
+const {log} = require(__rootdir + "/server/db");
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.set("trust proxy", "127.0.0.1");
 app.set("view engine", "ejs");
+
+app.use(bodyParser.urlencoded({extended: false}));
 
 const staticPath = __dirname + '/public';
 app.use(lessMiddleware(staticPath));
@@ -32,42 +37,12 @@ app.use((req, res, next) => {
   next();
 })
 
-const apiBase = "/music";
-app.get(apiBase + "/:id", (req, res, next) => {
+app.get("/music/:id", (req, res, next) => {
   if(Object.keys(nameMap).includes(req.params.id)){
     return res.sendFile(nameMap[req.params.id]);
   }
   next();
 });
-
-const getSample = type => {
-  const samples = data[type];
-
-  const curr = samples[Math.floor(samples.length * Math.random())];
-
-  return {
-    url: apiBase + "/" + curr.name,
-    name: curr.name
-  }
-}
-
-const randomize = arr => {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
-  }
-  return arr;
-}
-
-const controlSample = () => {
-  return randomize([getSample("real"), getSample("baseline")]);
-}
-
-const testSample = () => {
-  return randomize([getSample("real"), getSample("generated")]);
-}
 
 app.get("/", (req, res) => {
   const count = req.session.count;
@@ -81,6 +56,10 @@ app.get("/", (req, res) => {
 
 app.post("/vote", (req, res) => {
   req.session.trials++;
+
+  log(req.ip, req.body.name, req.body.other);
+
+  res.end();
 })
 
 app.listen(PORT, () => console.log(`Started server at port ${PORT}`));
