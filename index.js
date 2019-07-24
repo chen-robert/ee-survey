@@ -59,7 +59,7 @@ app.post("/vote", (req, res) => {
 
   log(req.ip, req.body.name, req.body.other);
 
-  res.end();
+  res.redirect("back");
 })
 
 app.listen(PORT, () => console.log(`Started server at port ${PORT}`));

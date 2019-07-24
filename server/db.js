@@ -10,7 +10,7 @@ const model = (time, ip, chosen, notChosen) => {
   return {time, ip, chosen, notChosen};
 }
 
-const log = (chosen, notChosen, ip) => {
+const log = (ip, chosen, notChosen) => {
   const time = Date.now();
 
   db.get("votes")

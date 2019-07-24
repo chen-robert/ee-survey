@@ -28,11 +28,7 @@ window.onload = () => {
       }
 
       const $form = $(panel).find("form");
-      const name = $form.find(`input[name="name"]`).val();
-      const other = $form.find(`input[name="other"]`).val();
-
-      $.post($form[0].action, {name, other})
-        .then(console.log);
+      $form.submit();
     }
   });
 
