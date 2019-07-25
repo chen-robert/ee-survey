@@ -12,9 +12,7 @@
       window.INFORMAL = <%= informal? "true": "false" %>;
       window.TRIAL = <%= trial %>;
     </script>
-    <% if(!informal) { %>
-      <% include ../partials/navbar %>
-    <% } %>
+    <% include ../partials/navbar %>
     <section class="survey <%= informal && trial === 0? 'hide': '' %>">
       <p class="survey--title">
         <% if(informal) { %>
