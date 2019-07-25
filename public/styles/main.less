@@ -5,6 +5,7 @@
 .survey{
   padding: 50px;
   padding-top: 150px;
+  padding-bottom: 0 !important;
 
   display: flex;
   flex-wrap: wrap;
@@ -22,13 +23,13 @@
   width: 100%;
   text-align: center;
   font-size: 1.3em;
-  margin-bottom: 25px;
 }
 
 .survey--subtitle {
   width: 100%;
   text-align: center;
   font-size: 1.1em;
+  margin: 15px 0;
 }
 
 .panel--container {
@@ -72,4 +73,14 @@
   border: 0;
   font-style: inherit;
   font-family: 'Cutive Mono', monospace;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .survey {
+    padding: 15px;
+  }
+
+  .panel--container {
+    margin: 5px 0;
+  }
 }
