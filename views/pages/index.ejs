@@ -8,14 +8,32 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
   </head>
   <body>
-    <script>window.INFORMAL = <%= informal? "true": "false" %></script>
-    <% include ../partials/navbar %>
-    <section class="survey">
+    <script>
+      window.INFORMAL = <%= informal? "true": "false" %>;
+      window.TRIAL = <%= trial %>;
+    </script>
+    <% if(!informal) { %>
+      <% include ../partials/navbar %>
+    <% } %>
+    <section class="survey <%= trial === 0? 'hide': '' %>">
       <p class="survey--title">
         <% if(informal) { %>
           Think hard... Which audio sample sounds more like classical music?
         <% } else { %>
           Please choose the audio clip that sounds most similar to classical music. 
+        <% } %>
+      </p>
+      <p class="survey--subtitle" id="trial-count">
+        <% if(!informal) { %>
+          <% if(trial >= 10) { %>
+              Thank you for your participation! Your responses are recorded, but you may submit more if you would like.
+            <% } else { %>
+              <%= trial %> / 10 complete
+          <% } %>
+        <% } else { %>
+          <% if (trial >= 2) { %>
+            <%= trial %> <%= trial >= 3? "cool points": "" %>
+          <% } %>
         <% } %>
       </p>
       <% samples.forEach((sample, i) => { %>

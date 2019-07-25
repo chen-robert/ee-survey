@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 
-const randomString = () => crypto.randomBytes(64).toString("hex");
+const randomString = () => crypto.randomBytes(16).toString("hex");
 
 const randomize = arr => {
   for (let i = arr.length - 1; i > 0; i--) {

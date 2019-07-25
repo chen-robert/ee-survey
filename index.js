@@ -46,16 +46,19 @@ app.get("/music/:id", (req, res, next) => {
 
 app.get("/", (req, res) => {
   const count = req.session.count;
-  req.session.count++;
+
+  if(!req.session.samples) req.session.samples = count % 2 === 0? controlSample(): testSample()
 
   res.render("pages/index", {
-    samples: count % 2 === 0? controlSample(): testSample(),
-    informal: req.query.informal
+    samples: req.session.samples,
+    informal: req.query.informal,
+    trial: req.session.count
   })
 });
 
 app.post("/vote", (req, res) => {
-  req.session.trials++;
+  req.session.count++;
+  req.session.samples = undefined;
 
   log(req.ip, req.body.name, req.body.other);
 
