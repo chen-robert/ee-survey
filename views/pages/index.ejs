@@ -15,7 +15,7 @@
     <% if(!informal) { %>
       <% include ../partials/navbar %>
     <% } %>
-    <section class="survey <%= trial === 0? 'hide': '' %>">
+    <section class="survey <%= informal && trial === 0? 'hide': '' %>">
       <p class="survey--title">
         <% if(informal) { %>
           Think hard... Which audio sample sounds more like classical music?

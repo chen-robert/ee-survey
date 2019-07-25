@@ -30,54 +30,56 @@ const randomMessages = [
 window.onload = () => {
   let playCount = 0;
 
-  if(window.TRIAL === 0) {
-    start()
-      .then(log("Who am I?"))
-      .after(3, log("What is the meaning of life? "))
-      .after(3, log("To what extent are recurrent neural networks able to generate classical music indistinguishable to the human ear? "))
-      .after(3, log("These are the questions that have plagued mankind for eons"))
-      .after(3, log("Today we stand at the brink of a philosophical breakthrough"))
-      .after(3, log("All you have to do is click "))
-      .after(1, () => $(".survey").removeClass("hide"))
-      .wait(2)
-      .end();
-  }else if(window.TRIAL === 1) {
-    start()
-      .then(log("Congratulations! You did so well that they decided to give you another sample to listen to!"))
-      .after(3, log("Here."))
-      .after(1, () => $("#trial-count").text(window.TRIAL))
-      .after(1, log("A number for you to look at. I wonder what it does?"))
-      .after(2, log("I guess the only way to find out is to listen to more music?"))
-      .end();
-  } else if(window.TRIAL === 2) {
-    start()
-      .then(log("Woah! It went up!"))
-      .after(3, log("I wonder how high that number will go?"))
-      .end();
+  if(window.INFORMAL) {
+    if(window.TRIAL === 0) {
+      start()
+        .then(log("Who am I?"))
+        .after(3, log("What is the meaning of life? "))
+        .after(3, log("To what extent are recurrent neural networks able to generate classical music indistinguishable to the human ear? "))
+        .after(3, log("These are the questions that have plagued mankind for eons"))
+        .after(3, log("Today we stand at the brink of a philosophical breakthrough"))
+        .after(3, log("All you have to do is click "))
+        .after(1, () => $(".survey").removeClass("hide"))
+        .wait(2)
+        .end();
+    }else if(window.TRIAL === 1) {
+      start()
+        .then(log("Congratulations! You did so well that they decided to give you another sample to listen to!"))
+        .after(3, log("Here."))
+        .after(1, () => $("#trial-count").text(window.TRIAL))
+        .after(1, log("A number for you to look at. I wonder what it does?"))
+        .after(2, log("I guess the only way to find out is to listen to more music?"))
+        .end();
+    } else if(window.TRIAL === 2) {
+      start()
+        .then(log("Woah! It went up!"))
+        .after(3, log("I wonder how high that number will go?"))
+        .end();
 
-  } else if(window.TRIAL >= 3) {
-    switch(window.TRIAL) {
-      case 3: 
-        start()
-          .then(log("Cool points?"))
-          .after(2, log("I bet you'll be super cool if you can get 10 cool points"))
-          .end();
-        break;
-      case 5: 
-        start()
-          .then(log("Apparently you only have to listen to 10 of these"))
-          .after(2, log("Something about a leaderboard"))
-          .after(2, log("So I guess you're halfway there. yay?"))
-          .end();
-        break;
-      case 8:
-        start()
-          .then(log("Bad news. Turns out we didn't have funding for a leaderboard"))
-          .end();
-        break;
-      default:
-        first(log(randomMessages[Math.floor(Math.random() * randomMessages.length)]));
-        break;
+    } else if(window.TRIAL >= 3) {
+      switch(window.TRIAL) {
+        case 3: 
+          start()
+            .then(log("Cool points?"))
+            .after(2, log("I bet you'll be super cool if you can get 10 cool points"))
+            .end();
+          break;
+        case 5: 
+          start()
+            .then(log("Apparently you only have to listen to 10 of these"))
+            .after(2, log("Something about a leaderboard"))
+            .after(2, log("So I guess you're halfway there. yay?"))
+            .end();
+          break;
+        case 8:
+          start()
+            .then(log("Bad news. Turns out we didn't have funding for a leaderboard"))
+            .end();
+          break;
+        default:
+          first(log(randomMessages[Math.floor(Math.random() * randomMessages.length)]));
+          break;
+      }
     }
   }
 
