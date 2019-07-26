@@ -1,6 +1,10 @@
 # ee-survey
 
-This is the repository for a web-based survey I made to collect data regarding my IB extended essay. My research question is: To what extent are recurrent neural networks able to generate classical music indistinguishable to the human ear?
+This is the repository for a web-based survey I made to collect data regarding my IB extended essay. 
+
+## Question
+
+To what extent are recurrent neural networks able to generate classical music indistinguishable to the human ear?
 
 ## Overview
 
