@@ -76,6 +76,15 @@ window.onload = () => {
             .then(log("Bad news. Turns out we didn't have funding for a leaderboard"))
             .end();
           break;
+        case 10:
+          start()
+            .then(log("Wow! You got 10 cool points! Congratulations - you are officially super cool"))
+            .after(3, log("I bet if you get 15 cool points, something even cooler happens though..."))
+            .end();
+        case 15:
+          start()
+            .then("You beat the game! Good job :)")
+            .end();
         default:
           first(log(randomMessages[Math.floor(Math.random() * randomMessages.length)]));
           break;
