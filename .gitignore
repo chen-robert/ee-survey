@@ -2,5 +2,6 @@ node_modules
 
 public/styles/*.css
 *.wav
+*.mp3
 
-db.json
+ext/db.json
