@@ -1,7 +1,7 @@
 {
   "name": "survey",
   "version": "1.0.0",
-  "description": "Survey website for my EE",
+  "description": "A website to collect data for my IB Extended Essay",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
