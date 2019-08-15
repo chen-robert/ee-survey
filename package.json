@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo none",
     "dev": "nodemon index.js --watch views --watch server --watch public --watch index.js",
-    "format": "prettier \"src/**/*\" --write",
+    "format": "prettier \"server/**/*\" --write",
     "start": "node index.js"
   },
   "author": "Robert Chen",
