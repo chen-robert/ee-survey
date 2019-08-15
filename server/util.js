@@ -10,9 +10,9 @@ const randomize = arr => {
     arr[j] = tmp;
   }
   return arr;
-}
-
+};
 
 module.exports = {
-  randomString, randomize
-}
+  randomString,
+  randomize
+};
